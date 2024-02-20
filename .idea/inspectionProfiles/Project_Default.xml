@@ -1,0 +1,135 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="LossyEncoding" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="PyPackageRequirementsInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredPackages">
+        <value>
+          <list size="6">
+            <item index="0" class="java.lang.String" itemvalue="Django" />
+            <item index="1" class="java.lang.String" itemvalue="asgiref" />
+            <item index="2" class="java.lang.String" itemvalue="djangorestframework" />
+            <item index="3" class="java.lang.String" itemvalue="celery" />
+            <item index="4" class="java.lang.String" itemvalue="pytz" />
+            <item index="5" class="java.lang.String" itemvalue="click" />
+          </list>
+        </value>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="PyPep8Inspection" enabled="true" level="WEAK WARNING" enabled_by_default="true">
+      <option name="ignoredErrors">
+        <list>
+          <option value="E501" />
+          <option value="E722" />
+          <option value="E302" />
+          <option value="E271" />
+          <option value="E265" />
+          <option value="E303" />
+          <option value="E101" />
+          <option value="E711" />
+          <option value="E251" />
+          <option value="E301" />
+        </list>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="PyPep8NamingInspection" enabled="true" level="WEAK WARNING" enabled_by_default="true">
+      <option name="ignoredErrors">
+        <list>
+          <option value="N801" />
+          <option value="N806" />
+        </list>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="PyShadowingBuiltinsInspection" enabled="true" level="WEAK WARNING" enabled_by_default="true">
+      <option name="ignoredNames">
+        <list>
+          <option value="filter" />
+        </list>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="PyUnresolvedReferencesInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredIdentifiers">
+        <list>
+          <option value="pacto.pactoapps.apipacto.views.apipacto" />
+          <option value="pacto.pactoapps.apipacto.integracao.reserva_site_sql.apipacto" />
+          <option value="pactoapps.pactoapps.urls.*" />
+          <option value="pactoapps.apipacto.views.Manutencao" />
+          <option value="pactoapps.apipacto.views.apipacto" />
+          <option value="pactoapps.apipacto.views.CondominioEspaco" />
+          <option value="pactoapps.apipacto.views.UserDeviceToken" />
+          <option value="pactoapps.apipacto.serializers.AvaliacaoParceiro" />
+          <option value="pactoapps.apipacto.views.ManutencaoSerializer" />
+          <option value="pactoapps.apipacto.serializers.Manutencao" />
+          <option value="pactoapps.apipacto.serializers.Condominio" />
+          <option value="pactoapps.apipacto.serializers.NadaConsta" />
+          <option value="pactoapps.apipacto.serializers.Sistema" />
+          <option value="pactoapps.apipacto.serializers.AcaoApi" />
+          <option value="pactoapps.apipacto.views.Condominio" />
+          <option value="pactoapps.apipacto.views.serializers" />
+          <option value="pactoapps.apipacto.views.OcorrenciaSerializer" />
+          <option value="pactoapps.apipacto.views.Ocorrencia" />
+          <option value="pactoapps.apipacto.views.PautaAnexo" />
+          <option value="pactoapps.apipacto.views.PautaAnexoSerializer" />
+          <option value="apipacto.models.EnderecoCondominio.objects" />
+          <option value="apipacto.models.CartaoDespesa.*" />
+          <option value="apipacto.models.Condominio.objects" />
+          <option value="apipacto.models.Parceiro.objects" />
+          <option value="apipacto.models.OcorrenciaEsclarecimento.objects" />
+          <option value="apipacto.models.CondominioEspaco.objects" />
+          <option value="apipacto.models.Assembleia.objects" />
+          <option value="apipacto.models.CategoriaDocumento.objects" />
+          <option value="pactoapps.apipacto.models.apipacto" />
+          <option value="pactoapps.apipacto.models.*" />
+          <option value="pactoapps.apipacto.views.EmailUser" />
+          <option value="pactoapps.apipacto.views.Encomenda" />
+          <option value="pactoapps.apipacto.views.OcorrenciaEsclarecimento" />
+          <option value="pactoapps.apipacto.views.SMSSerializer" />
+          <option value="pactoapps.apipacto.views.Unidade" />
+          <option value="pactoapps.apipacto.views.UnidadeSerializer" />
+          <option value="pactoapps.apipacto.views.TelefoneUser" />
+          <option value="pactoapps.apipacto.views.TelefoneUserSerializer" />
+          <option value="pactoapps.apipacto.views.EmailUserSerializer" />
+          <option value="pactoapps.apipacto.views.EnderecoUser" />
+          <option value="pactoapps.apipacto.views.EnderecoUserSerializer" />
+          <option value="pactoapps.apipacto.views.EnderecoCondominio" />
+          <option value="pactoapps.apipacto.views.EnderecoCondominioSerializer" />
+          <option value="pactoapps.apipacto.views.User" />
+          <option value="pactoapps.apipacto.views.UserSerializer" />
+          <option value="pactoapps.apipacto.views.config_user" />
+          <option value="pactoapps.apipacto.views.GroupSerializer" />
+          <option value="pactoapps.apipacto.views.Termo" />
+          <option value="pactoapps.apipacto.views.TermoSerializer" />
+          <option value="pactoapps.apipacto.views.AceiteTermoSerializer" />
+          <option value="pactoapps.apipacto.views.SolicitacaoCadastro" />
+          <option value="pactoapps.apipacto.views.SolicitacaoCadastroSerializer" />
+          <option value="pactoapps.apipacto.views.SolicitacaoMalote" />
+          <option value="pactoapps.apipacto.views.SolicitacaoMaloteSerializer" />
+          <option value="pactoapps.apipacto.views.ContaBancaria" />
+          <option value="pactoapps.apipacto.views.ContaBancariaSerializer" />
+          <option value="pactoapps.apipacto.views.*" />
+          <option value="pactoapps.apipacto.serializers.ReservaEspaco" />
+          <option value="pactoapps.apipacto.helper_reserva.apipacto" />
+          <option value="pactoapps.apipacto.serializers.ValidationError" />
+          <option value="pactoapps.apipacto.serializers.SolicitacaoTransferencia" />
+          <option value="pactoapps.apipacto.serializers.ContaBancaria" />
+          <option value="pactoapps.apipacto.serializers.apipacto" />
+          <option value="pactoapps.apipacto.serializers.Unidade" />
+          <option value="pactoapps.apipacto.serializers.User" />
+          <option value="pactoapps.apipacto.backendauth_update.config_conselheiro" />
+          <option value="pactoapps.apipacto.backendauth_update.config_ordem_pagamento" />
+          <option value="pactoapps.apipacto.backendauth_update.apipacto" />
+          <option value="pactoapps.apipacto.backendauth_update.config_user" />
+          <option value="pactoapps.apipacto.backendauth_update.User" />
+          <option value="pactoapps.apipacto.backendauth_update.config_endereco_condominio" />
+          <option value="pactoapps.apipacto.backendauth_update.config_condominio" />
+          <option value="pactoapps.apipacto.backendauth_update.config_conta_bancaria" />
+          <option value="pactoapps.apipacto.backendauth_update.ContaBancaria" />
+          <option value="pactoapps.apipacto.backendauth_update.config_unidade" />
+          <option value="pactoapps.apipacto.backendauth_update.config_sindico" />
+          <option value="pactoapps.apipacto.backendauth_update.config_proprietario" />
+          <option value="pactoapps.apipacto.backendauth_update.config_locatario" />
+        </list>
+      </option>
+    </inspection_tool>
+  </profile>
+</component>

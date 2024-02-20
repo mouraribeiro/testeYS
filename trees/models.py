@@ -13,11 +13,6 @@ class Account(models.Model):
         return self.name
 
 
-# class User(models.Model):
-#     user = models.OneToOneField(User, on_delete=models.CASCADE)
-#
-#     def __str__(self):
-#         return self.user
 
 
 class Profile(models.Model):
@@ -37,7 +32,7 @@ class Tree(models.Model):
         return self.name
 
 
-class PlantedTree(models.Model):
+class Plant(models.Model):
     age = models.IntegerField()
     planted_at = models.DateTimeField()
     user = models.ForeignKey(User, on_delete=models.CASCADE)

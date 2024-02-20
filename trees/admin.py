@@ -5,5 +5,5 @@ from .models import *
 
 admin.site.register(Account)
 admin.site.register(Tree)
-admin.site.register(PlantedTree)
+admin.site.register(Plant)
 admin.site.register(Profile)

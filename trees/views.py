@@ -1,24 +1,28 @@
-from django.shortcuts import render
+from django.contrib.auth.forms import UserCreationForm
+from django.shortcuts import render, get_object_or_404
 
 # Create your views here.
-
 from django.http import HttpResponse
 from django.shortcuts import render
+from django.urls import reverse_lazy
+from django.views import generic
 from django.views.generic import ListView
 from .models import *
 
 
 # Create your views here.
-
-class AccountCreate(ListView):
-    model = Account
-def home(self, request):
-    user = self.request.user
-    return HttpResponse("olá")
+class SingUp(generic.CreateView):
+    form_class = UserCreationForm
+    success_url = reverse_lazy('login')
+    template_name = 'registration/register.html'
 
 
+def Plant_list(request):
+    planted_tree_list = Plant.objects.all().order_by('-created_at')
+    return render(request, 'plant/list.html', {'tree': planted_tree_list})
 
-# @login_required
-# def final(request):
-#     bookings = Sign.objects.filter(user=request.user)
-#     return render(request, 'datas/final.html', {'bookings': bookings})
+
+def PlantView(request, id):
+    planted_tree = get_object_or_404(Tree, pk=id)
+    return render(request, 'plant/view.html', {'tree': planted_tree})
+

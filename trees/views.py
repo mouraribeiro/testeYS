@@ -18,7 +18,7 @@ class SingUp(generic.CreateView):
 
 
 def Plant_list(request):
-    planted_tree_list = Plant.objects.all().order_by('-created_at')
+    planted_tree_list = Plant.objects.all()
     return render(request, 'plant/list.html', {'tree': planted_tree_list})
 
 

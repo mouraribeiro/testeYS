@@ -2,7 +2,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, get_object_or_404, redirect
 
 # Create your views here.
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic
@@ -25,14 +25,18 @@ def Plant_list(request):
 
 
 def PlantView(request, id):
-    planted_tree = get_object_or_404(Tree, pk=id)
-    return render(request, 'plant/view.html', {'tree': planted_tree})
+    planted_tree = get_object_or_404(Plant, pk=id)
+    return render(request, 'plant/view.html', {'plant': planted_tree})
+
 
 def createPlant(request):
-    if request.method == "POST":
+    if request.method == 'POST':
         form = PlantForm(request.POST)
 
         if form.is_valid():
             plant = form.save(commit=False)
             plant.save()
-        return redirect('/')
+            return redirect('/')
+    else:
+        form = PlantForm()
+        return render(request, 'plant/create_plant.html', {'form': form})

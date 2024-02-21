@@ -1,6 +1,16 @@
 from django.db import models
 from django.contrib.auth.models import User
+
+
 # Create your models here.
+
+class Profile(models.Model):
+    about = models.TextField(max_length=500)
+    joined = models.DateTimeField()
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.user
 
 
 class Account(models.Model):
@@ -11,17 +21,6 @@ class Account(models.Model):
 
     def __str__(self):
         return self.name
-
-
-
-
-class Profile(models.Model):
-    about = models.TextField(max_length=500)
-    joined = models.DateTimeField()
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return self.user
 
 
 class Tree(models.Model):
@@ -38,6 +37,8 @@ class Plant(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     tree = models.ForeignKey(Tree, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return self.tree.name
 
     def location(self):
         pass

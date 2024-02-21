@@ -3,11 +3,9 @@ from django.urls import path, include
 from trees.views import *
 
 urlpatterns = [
-    path('register/', SingUp.as_view(), name ='singup'),
-    path('list/', Plant_list, name ='plant list'),
-    path('view/', PlantView, name ='plant view'),
-    path('create/', createPlant, name ='create plant'),
-
+    path('register/', SingUp.as_view(), name='singup'),
+    path('', Plant_list, name='plant list'),
+    path('plant/<int:id>/', PlantView, name='plant list'),
+    path('create/', createPlant, name='create plant'),
 
 ]
-

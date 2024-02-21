@@ -1,7 +1,56 @@
 {% extends 'base.html' %}
 
 
-{% block title %} Listar {% endblock %}
+{% block title %} Plants {% endblock %}
 
 
-{% block main %} Listar {% endblock %}
+{% block content %}
+
+<div class="offset-1 col-10 list-div container-lista">
+    <h1>Lista de Plantas</h1>
+    <a id="add-link" class="btn-add" href="create/">
+        <div class="col-2 add-div">
+            <i class="fas fa-plus"></i> Planta
+        </div>
+    </a>
+
+    {% if messages %}
+    <ul>
+        {% for message in messages %}
+        <li {% if message.tags %} class="alert alert-{{message.tags}}" {% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+
+    {% endif %}
+    <ul class="taks-list">
+        {% for planta in plantas %}
+        <li class="task-item">
+            <span><a href="restaurante/{{restaurante.id}}">{{ planta.nome}}</a></span>
+            <a  class="delete-btn" href="delete/{{restaurante.id}}"><span><i class="fas fa-trash"></i></span></a>
+            <a href="edit/{{restaurante.id}}"><span><i class="fas fa-edit"></i></span></a>
+
+        </li>
+        {% endfor %}
+
+
+    </ul>
+<!--    <div class="pagination">-->
+<!--        <span class="step-links">-->
+<!--            {% if restaurante.has_previous %}-->
+<!--            <a href="?page={{ restaurante.previous_page_number }}"><i class="fas fa-arrow-left"></i></a>-->
+<!--            {% endif %}-->
+
+<!--            -->
+<!--            <span class="current">-->
+<!--                {{restaurante.number}} de {{restaurante.paginator.num_pages}}-->
+<!--            </span>-->
+<!--            -->
+
+<!--            {% if restaurante.has_next %}-->
+<!--            <a href="?page={{ restaurante.next_page_number }}"><i class="fas fa-arrow-right"></i></a>-->
+<!--            {% endif %}-->
+<!--        </span>-->
+<!--    </div>-->
+</div>
+
+{% endblock %}

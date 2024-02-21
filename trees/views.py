@@ -29,7 +29,20 @@ def PlantView(request, id):
     return render(request, 'plant/view.html', {'plant': planted_tree})
 
 
-def createPlant(request):
+def plant_tree(request):
+    if request.method == 'POST':
+        form = PlantForm(request.POST)
+
+        if form.is_valid():
+            plant = form.save(commit=False)
+            plant.save()
+            return redirect('/')
+    else:
+        form = PlantForm()
+        return render(request, 'plant/create_plant.html', {'form': form})
+
+# metodo para add vários objetos
+def plant_trees(request):
     if request.method == 'POST':
         form = PlantForm(request.POST)
 

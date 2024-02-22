@@ -1,15 +1,18 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, get_object_or_404, redirect
+from django.core.serializers import serialize
+import json
+from django.http import JsonResponse
 
 # Create your views here.
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic
-from django.views.generic import ListView
+from django.views.generic import CreateView
 
-from .forms import PlantForm, LocationForm
+from .forms import CreatePlantForm
 from .models import *
 
 
@@ -31,42 +34,37 @@ def PlantView(request, id):
     planted_tree = get_object_or_404(Plant, pk=id)
     return render(request, 'plant/view.html', {'plant': planted_tree})
 
+class PlantCreate(CreateView):
+    model = Plant
+    template_name = 'plant/create_plant.html'
+    form_class = CreatePlantForm
+    success_message = "Criado com sucesso!"
+    success_url = reverse_lazy('create-plant')
 
-@login_required
-def plant_tree(request):
-    if request.method == 'POST':
-        form = PlantForm(request.POST)
-        form_location = LocationForm(request.POST)
-
-        if form.is_valid():
-            plant = form.save(commit=False)
-            local = form_location.save(commit=False)
-            plant.save()
-            local.save()
-            return HttpResponse('DEu bom')
-        form = PlantForm()
-        return render(request, 'plant/create_plant.html', {'form': form})
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super(PlantCreate, self).form_valid(form)
 
 
 # metodo para add vários objetos
 @login_required
 def plant_trees(request):
     if request.method == 'POST':
-        form = PlantForm(request.POST)
+        form = CreatePlantForm(request.POST)
 
         if form.is_valid():
             plant = form.save(commit=False)
             plant.save()
             return redirect('/')
     else:
-        form = PlantForm()
-        return render(request, 'plant/create_plant.html', {'form': form})
-
-
-from django.http import JsonResponse
+        form = CreatePlantForm()
+    return render(request, 'plant/create_plant2.html', {'form': form})
 
 
 def plants_json(request):
-    # do something with the your data
+    plant = Plant.objects.all()
+    serialized_data = serialize("json", plant)
+    serialized_data = json.loads(serialized_data)
+    serialized_data
 
-    pass
+    return JsonResponse(serialized_data, safe=False, status=200)

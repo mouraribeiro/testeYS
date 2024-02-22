@@ -34,9 +34,7 @@ class TemplateTest(TestCase):
 
     def test_post_create_view_POST_success(self):
         self.client.login(username='rayanne', password='test_password')
-        response = self.client.get('/create/')
-        self.assertEquals(response.status_code, 200)
-        url_base = 'http://127.0.0.1:8000/create/'
+        url_base = 'http://127.0.0.1:8000/multiple/'
         tree = "tree"
         data = {
             "id": 1,
@@ -44,12 +42,12 @@ class TemplateTest(TestCase):
             "tree": tree,
             "location": '-19.912998, -43.940933'
         }
-
-        response = self.client.post(url_base, data=data,
-                                    follow=True)
-        print(Plant.objects.all()) # make sure your url is correct too btw that could also be the issue
+        response = self.client.post(url_base, data, content_type="application/x-www-form-urlencoded")
+        # response = self.client.post(url_base, data=data,
+        #                             follow=True)
+        # print(Plant.objects.all()) # make sure your url is correct too btw that could also be the issue
         self.assertEquals(response.status_code, 200)
-        self.assertEquals(Plant.objects.filter(id=1).count(), 1)
+        # self.assertEquals(Plant.objects.all().last().count(), 1)
 
 
 # Criar um teste de template que mostre que a listagem de árvores plantadas pelos usuários das

@@ -47,18 +47,18 @@ class PlantCreate(CreateView):
 
 
 # metodo para add vários objetos
-@login_required
-def plant_trees(request):
-    if request.method == 'POST':
-        form = PlantForm(request.POST)
-
-        if form.is_valid():
-            plant = form.save(commit=False)
-            plant.save()
-            return redirect('/')
-    else:
-        form = PlantForm()
-        return render(request, 'plant/create_plant.html', {'form': form})
+# @login_required
+# def plant_trees(request):
+#     if request.method == 'POST':
+#         form = PlantForm(request.POST)
+#
+#         if form.is_valid():
+#             plant = form.save(commit=False)
+#             plant.save()
+#             return redirect('/')
+#     else:
+#         form = PlantForm()
+#         return render(request, 'plant/create_plant.html', {'form': form})
 
 
 def plants_json(request):

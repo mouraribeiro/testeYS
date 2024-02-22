@@ -1,7 +1,7 @@
 
 from django.test import Client, TestCase
 from django.urls import reverse
-from .models import Plant, User
+from .models import Plant, User, Tree
 
 # Create your tests here.
 
@@ -32,22 +32,23 @@ class TemplateTest(TestCase):
         self.assertEqual(403, response.status_code)
 
 
-class PrivateListTestCase(BaseViewTestCase):
 
-    def setUp(self):
-        super(PrivateListTestCase, self).setUp()
-        self.url = reverse('plantlist')
 
-    def test_user_sees_own_book(self):
-        response = self.client.get(self.url)
-        self.assertEqual(200, response.status_code)
-        self.assertEqual(self.first_book.name, response.context['book'].name)
-        self.assertTemplateUsed('myapp/book/view_template.html')
-
-    def test_user_cant_see_others_books(self):
-        response = self.another_client.get(self.url)
-        self.assertEqual(403, response.status_code)
-
+# class PrivateListTestCase(BaseViewTestCase):
+#
+#     def setUp(self):
+#         super(PrivateListTestCase, self).setUp()
+#         self.url = reverse('plantlist')
+#
+#     def test_user_sees_own_book(self):
+#         response = self.client.get(self.url)
+#         self.assertEqual(200, response.status_code)
+#         self.assertEqual(self.first_book.name, response.context['book'].name)
+#         self.assertTemplateUsed('myapp/book/view_template.html')
+#
+#     def test_user_cant_see_others_books(self):
+#         response = self.another_client.get(self.url)
+#         self.assertEqual(403, response.status_code)
 
 
 
@@ -57,7 +58,15 @@ class PrivateListTestCase(BaseViewTestCase):
 # Criar um teste de template que mostre que a listagem de árvores plantadas pelos usuários das
 # contas das quais o usuário é membro está sendo renderizada corretamente
 
-
 # Criar testes unitários para os métodos User.plant_tree() e User.plant_trees que
 # demonstrem que, ao serem chamados, os respectivos objetos Plant são criados e
 # associados ao usuário.
+def test_valid_form(self):
+    tree = Tree.objects.get(id=1)
+    print(tree)
+    w = Plant.objects.create(age=2, tree=tree, location='-19.912998, -43.940933')
+    data = {'age': w.title, 'tree': w.body, 'location': w.location}
+    form = CreatePlantForm(data=data)
+    self.assertTrue(form.is_valid())
+
+

@@ -6,6 +6,6 @@ urlpatterns = [
     path('register/', SingUp.as_view(), name='singup'),
     path('', Plant_list, name='plant list'),
     path('plant/<int:id>/', PlantView, name='plant list'),
-    path('create/', createPlant, name='create plant'),
+    path('create/', plant_tree, name='create plant'),
 
 ]

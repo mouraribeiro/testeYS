@@ -1,6 +1,7 @@
 from django import forms
 
-from .models import Plant, Tree, Location
+from .models import Plant, Tree, Location, Account
+
 
 class CreatePlantForm(forms.ModelForm):
     age = forms.CharField(
@@ -12,6 +13,11 @@ class CreatePlantForm(forms.ModelForm):
     #     widget=forms.DateTimeInput(
     #         attrs={'placeholder': 'Enter Date', 'class': 'form-control'}
     # ))
+    account = forms.ModelChoiceField(
+        queryset=Account.objects.all(),
+        widget=forms.Select(
+            attrs={'class': 'form-control'}
+        ))
 
     tree = forms.ModelChoiceField(
         queryset=Tree.objects.all(),
@@ -27,4 +33,4 @@ class CreatePlantForm(forms.ModelForm):
 
     class Meta:
         model = Plant
-        fields = ['age', 'tree', 'location']
+        fields = ['age', 'tree', 'location','account']

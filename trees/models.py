@@ -4,23 +4,24 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 
-class Profile(models.Model):
-    about = models.TextField(max_length=500)
-    joined = models.DateTimeField(auto_now_add=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return self.user
-
 
 class Account(models.Model):
     name = models.CharField(max_length=100)
     created = models.DateTimeField(auto_now_add=True)
     active = models.BooleanField()
-    user = models.ManyToManyField(User)
+
 
     def __str__(self):
         return self.name
+class Profile(models.Model):
+    about = models.TextField(max_length=500)
+    joined = models.DateTimeField(auto_now_add=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    account = models.ForeignKey(Account, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.user.username
+
 
 
 class Tree(models.Model):
@@ -45,6 +46,7 @@ class Plant(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     tree = models.ForeignKey(Tree, on_delete=models.CASCADE)
     location = models.ForeignKey(Location, on_delete=models.CASCADE , null=True)
+    account = models.ForeignKey(Account, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.tree.name

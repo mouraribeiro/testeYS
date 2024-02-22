@@ -9,7 +9,7 @@ from django.urls import reverse_lazy
 from django.views import generic
 from django.views.generic import ListView
 
-from .forms import PlantForm
+from .forms import PlantForm, LocationForm
 from .models import *
 
 
@@ -31,16 +31,19 @@ def PlantView(request, id):
     planted_tree = get_object_or_404(Plant, pk=id)
     return render(request, 'plant/view.html', {'plant': planted_tree})
 
+
 @login_required
 def plant_tree(request):
     if request.method == 'POST':
         form = PlantForm(request.POST)
+        form_location = LocationForm(request.POST)
 
         if form.is_valid():
             plant = form.save(commit=False)
+            local = form_location.save(commit=False)
             plant.save()
-            return redirect('/')
-    else:
+            local.save()
+            return HttpResponse('DEu bom')
         form = PlantForm()
         return render(request, 'plant/create_plant.html', {'form': form})
 
@@ -58,3 +61,12 @@ def plant_trees(request):
     else:
         form = PlantForm()
         return render(request, 'plant/create_plant.html', {'form': form})
+
+
+from django.http import JsonResponse
+
+
+def plants_json(request):
+    # do something with the your data
+
+    pass

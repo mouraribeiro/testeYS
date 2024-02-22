@@ -23,11 +23,10 @@
 
     {% endif %}
     <ul class="taks-list">
-        {% for planta in plantas %}
+        {% for tree in tree %}
         <li class="task-item">
-            <span><a href="restaurante/{{restaurante.id}}">{{ plant.tree}}</a></span>
-            <a  class="delete-btn" href="delete/{{restaurante.id}}"><span><i class="fas fa-trash"></i></span></a>
-            <a href="edit/{{restaurante.id}}"><span><i class="fas fa-edit"></i></span></a>
+            <span><a href="plant/{{tree.id}}">{{tree}}</a></span>
+            <a href="plant/{{tree.id}}"><span><i class="fa-solid fa-eye"></i></span></a>
 
         </li>
         {% endfor %}
@@ -40,11 +39,11 @@
 <!--            <a href="?page={{ restaurante.previous_page_number }}"><i class="fas fa-arrow-left"></i></a>-->
 <!--            {% endif %}-->
 
-<!--            -->
+
 <!--            <span class="current">-->
 <!--                {{restaurante.number}} de {{restaurante.paginator.num_pages}}-->
 <!--            </span>-->
-<!--            -->
+
 
 <!--            {% if restaurante.has_next %}-->
 <!--            <a href="?page={{ restaurante.next_page_number }}"><i class="fas fa-arrow-right"></i></a>-->

@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}  Plantas {% endblock %}
+
+
+{% block content %}
+
+<div class="offset-1 col-10 list-div">
+    <h2 style="text-align: center;">Adicione uma nova planta</h2>
+    <form  method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <input type="submit"class="btn btn-success btn-add" value="Salvar e Adicionar nova planta">
+
+    </form>
+    <a href="/"><input type="submit"class="btn btn-success btn-add" value="Ir para lista"></a>
+    
+</div>
+
+{% endblock %}

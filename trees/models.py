@@ -16,7 +16,7 @@ class Account(models.Model):
 class Profile(models.Model):
     about = models.TextField(max_length=500)
     joined = models.DateTimeField(auto_now_add=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     account = models.ForeignKey(Account, on_delete=models.CASCADE)
 
     def __str__(self):
@@ -43,7 +43,7 @@ class Location(models.Model):
 class Plant(models.Model):
     age = models.IntegerField()
     planted_at = models.DateTimeField(auto_now_add=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE,  null=True, blank=True)
     tree = models.ForeignKey(Tree, on_delete=models.CASCADE)
     location = models.ForeignKey(Location, on_delete=models.CASCADE , null=True)
     account = models.ForeignKey(Account, on_delete=models.CASCADE)

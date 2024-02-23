@@ -4,19 +4,15 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.core.serializers import serialize
 import json
 from django.http import JsonResponse
-
-# Create your views here.
-from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic
 from django.views.generic import CreateView
-
-from .forms import CreatePlantForm
+from .forms import CreatePlantForm, PlantFormset
 from .models import *
 
 
-# Create your views here.
+
 class SingUp(generic.CreateView):
     form_class = UserCreationForm
     success_url = reverse_lazy('login')
@@ -25,7 +21,7 @@ class SingUp(generic.CreateView):
 
 @login_required
 def Plant_list(request):
-    planted_tree_list = Plant.objects.all()
+    planted_tree_list = Plant.objects.filter(user=request.user)
     return render(request, 'plant/list.html', {'tree': planted_tree_list})
 
 
@@ -34,6 +30,8 @@ def PlantView(request, id):
     planted_tree = get_object_or_404(Plant, pk=id)
     return render(request, 'plant/view.html', {'plant': planted_tree})
 
+
+# criando pelo CreatView facilita a criação
 class PlantCreate(CreateView):
     model = Plant
     template_name = 'plant/create_plant.html'
@@ -50,17 +48,19 @@ class PlantCreate(CreateView):
 @login_required
 def plant_trees(request):
     if request.method == 'POST':
-        form = CreatePlantForm(request.POST)
+        formset = PlantFormset(request.POST)
 
-        if form.is_valid():
-            plant = form.save(commit=False)
-            plant.save()
-            return redirect('/')
+        if formset.is_valid():
+            for form in formset:
+                plant = form.save(commit=False)
+                plant.save()
+                return redirect('/')
     else:
-        form = CreatePlantForm()
+        form = PlantFormset()
     return render(request, 'plant/create_plant2.html', {'form': form})
 
 
+#retorna dados em json
 def plants_json(request):
     plant = Plant.objects.all()
     serialized_data = serialize("json", plant)

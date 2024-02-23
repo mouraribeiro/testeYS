@@ -1,4 +1,5 @@
 from django import forms
+from django.forms import formset_factory
 
 from .models import Plant, Tree, Location, Account
 
@@ -34,3 +35,6 @@ class CreatePlantForm(forms.ModelForm):
     class Meta:
         model = Plant
         fields = ['age', 'tree', 'location','account']
+
+
+PlantFormset = formset_factory(CreatePlantForm, extra=3)

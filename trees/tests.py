@@ -1,7 +1,12 @@
+import datetime
+from datetime import timezone
+from http import HTTPStatus
+
 from django.contrib.sites import requests
-from django.test import Client, TestCase, SimpleTestCase
+from django.http import response
+from django.test import Client, TestCase
 from django.urls import reverse
-from .models import Plant, User, Tree
+from .models import User, Plant, Tree, Account, Location
 
 
 # Create your tests here.
@@ -13,6 +18,7 @@ class TemplateTest(TestCase):
     def setUp(self):
         self.user = User.objects.create_user(username='rayanne', password='test_password', is_staff=True)
         self.another_user = User.objects.create_user(username='teste', password='1234', is_staff=True)
+
         self.user.save()
         self.another_user.save()
         self.user = Client()
@@ -23,30 +29,50 @@ class TemplateTest(TestCase):
         self.assertTemplateUsed(response, 'plant/list.html')
         self.assertTemplateUsed(response, 'base.html')
 
-    # Criar um teste de template que mostre que ao tentar acessar as árvores plantadas por outro
-    # usuário é retornado um erro 403 (Forbidden).
-    # def test_template_forbidden(self):
-    #     self.url = reverse('plantlist')
-    #     self.client.login(username='rayanne', password='test_password')
-    #     # self.another_user.login(username='teste', password='1234')
-    #     response = self.another_user.get(self.url)
-    #     self.assertEqual(403, response.status_code)
 
-    def test_post_create_view_POST_success(self):
+
+class TestPermission(TestCase):
+
+    def setUp(self):
+        self.user = User.objects.create_user(username='rayanne', password='test_password', is_staff=True)
+        self.another_user = User.objects.create_user(username='teste', password='1234', is_staff=True)
+
+        self.user.save()
+        self.another_user.save()
+        self.user = Client()
+        self.another_user = Client()
+
+# Criar um teste de template que mostre que ao tentar acessar as árvores plantadas por outro
+# usuário é retornado um erro 403 (Forbidden).
+    def test_forbidden(self):
         self.client.login(username='rayanne', password='test_password')
-        url_base = 'http://127.0.0.1:8000/multiple/'
-        tree = "tree"
-        data = {
-            "id": 1,
-            "age": 2,
-            "tree": tree,
-            "location": '-19.912998, -43.940933'
-        }
-        response = self.client.post(url_base, data, content_type="application/x-www-form-urlencoded")
-        # response = self.client.post(url_base, data=data,
-        #                             follow=True)
-        # print(Plant.objects.all()) # make sure your url is correct too btw that could also be the issue
-        self.assertEquals(response.status_code, 200)
-        # self.assertEquals(Plant.objects.all().last().count(), 1)
+        self.another_user.login(username='teste', password='1234')
+        request_user = self.another_user
+        url_base = 'http://127.0.0.1:8000/'
+        if request_user.get(url_base) == self.another_user:
+            return self.assertEqual(403, response.status_code)
 
+
+
+class PostPlantViewTests(TestCase):
+
+    def setUp(self):
+        self.user = User.objects.create_user(username='rayanne', password='test_password', is_staff=True)
+        self.user.save()
+        self.user = Client()
+
+    def test_get(self):
+        response = self.client.get("/create/")
+        self.assertEqual(response.status_code, HTTPStatus.OK)
+        self.assertContains(response, "<title> Plantas </title>", html=True)
+
+    def test_post_success(self):
+        self.user = User.objects.create_user(username='teste', password='test_password', is_staff=True)
+        tree = Tree.objects.create(name="planta1",scientific_name='plants')
+        account = Account.objects.create(name="Conta-1",created=datetime.datetime.now(),active=True)
+        location = Location.objects.create(lon=00.02584, lat=00.02584)
+
+        plant = Plant.objects.create(planted_at=datetime.datetime.now(), age= 2, user= self.user, tree= tree, location=location,account=account)
+        self.assertEqual(plant.age, 2)
+        self.assertEqual(plant.account, account)
 

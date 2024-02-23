@@ -10,12 +10,16 @@
     <h2 style="text-align: center;">Adicione uma nova planta</h2>
     <form  method="POST">
         {% csrf_token %}
+        <hr>
         {{ form.as_p }}
+        <hr>
 
-        <input type="submit"class="btn btn-success btn-add" value="Salvar e Adicionar nova planta">
+        <input type="submit"class="btn btn-success btn-add" value="Salvar">
+        <a href="/"><input type="submit"class="btn btn-success btn-add" value="Ir para lista"></a>
+
 
     </form>
-    <a href="/"><input type="submit"class="btn btn-success btn-add" value="Ir para lista"></a>
+
     
 </div>
 

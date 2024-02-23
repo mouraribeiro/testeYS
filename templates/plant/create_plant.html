@@ -11,7 +11,7 @@
     <form  method="POST">
         {% csrf_token %}
         {{ form.as_p }}
-
+<!--        usei esse input aqui para contornar temporariamente o adicionar vários objetos-->
         <input type="submit"class="btn btn-success btn-add" value="Salvar e Adicionar nova planta">
 
     </form>
